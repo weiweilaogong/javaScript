@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="jquery-1.8.2.min.js"></script>
+</head>
+<body>
+</body>
+<script>
+//克隆函数
+function clone(object){
+	if(object == null) return null;
+	if(typeof object !== 'object') return object;//!== 类型相同才判断  
+	if(object.constructor == Date) return new Date(object);//日期
+	if(object.constructor  == 'RegExp') return new RegExp(object)//正则
+
+	var  newObject = new object.constructor();//继承原型
+		console.log(arguments)
+	for (var key in object) {
+		if(object.hasOwnProperty(key)){
+			var val =  object[key];
+			newObject[key] = typeof val === 'object' ? arguments.callee(val):val; //如果key为 'object' 就在调用一下克隆方法
+		}
+	}
+	return newObject;
+}
+
+var person = {
+	eat:function(){
+		console.log("person:吃顿饭")
+	},
+	chirldren:["小马","小明","小红"],
+	name:"",
+	sex:function(x){
+		return x?"男":"女";
+	},
+	data:new Date(),
+	money:null,
+	laopo:undefined
+}
+
+var zhangsan = clone(person);
+console.log(zhangsan);
+
+//!== 和 == 的区别  !== 类型相同才会判断, == 会强转比较
+</script>
+</html>

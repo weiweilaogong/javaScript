@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>属性改变</title>
+</head>
+<body>
+<script type="text/javascript">
+	function change(obj){
+		obj.name = '张三';
+	}
+	var person = {
+		name:'lisi',
+		age:12
+	};
+	
+	var x,y;
+
+	x = person.name;
+	change(person);
+	y = person.name;
+	console.log(x)
+	console.log(y)
+	console.log(person)
+</script>
+</body>
+</html>

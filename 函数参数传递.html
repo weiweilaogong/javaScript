@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+var map = function(f,a){
+	var result = [],i;
+	for(i=0;i<a.length;i++)
+	result[i] = f(a[i])
+	return result;
+}
+
+var f = function(x){
+	return x* x *x;
+}
+var arr = [0,2,3,4];
+var arr1 = map(f,arr)
+console.log(arr1)
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	function person (name){
+		this.name = name;
+		this.eat = function(){
+			console.log(this.name+"开始吃到东西了")
+		}
+	}
+
+	var person1 = new person("hymen");
+	var person2 = new person("weiqiyan");
+
+	person1.eat();
+	person2.eat();
+</script>
+</body>
+</html>

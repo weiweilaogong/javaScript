@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+<script type="text/javascript">
+
+
+function foo(){
+
+}
+
+function bar(){
+
+}
+
+foo.prototype = {
+	foo_prop:"foo val"
+};
+
+var proto = {
+	bar_prop :"bar val"
+}
+
+// var f = new foo();
+
+Object.setPrototypeOf(
+	proto,foo.prototype
+);
+
+bar.prototype = proto;
+
+var ins = new bar();
+
+console.log(ins.foo_prop)
+console.log(ins.bar_prop)
+</script>
+</body>
+</html>

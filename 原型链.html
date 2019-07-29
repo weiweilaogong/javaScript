@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+var person = function(){
+	this.name='张三',
+	this.age = 11
+}
+
+var p = new person();
+person.prototype.name = 'lisi';
+person.prototype.age = 12;
+
+console.log(p)
+console.log(person)
+
+function doSomething(){
+	
+}
+doSomething.prototype.too = 'bar';
+console.log( doSomething.prototype );
+// 和声明函数的方式无关，
+// JavaScript 中的函数永远有一个默认原型属性。
+var doSomething = function(){};
+doSomething.prototype.too = 'bar';
+console.log( doSomething.prototype );
+
+
+var doSomethingInstance  = new doSomething();
+// doSomethingInstance.name
+console.log(doSomethingInstance)
+
+</script>
+</body>
+</html>

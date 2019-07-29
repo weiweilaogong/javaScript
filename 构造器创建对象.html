@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>s</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+function people(){
+	this.eat = [];
+	this.chilren = [];
+}
+
+people.prototype  = {
+	addchilren:function(chilren){
+		this.chilren.push(chilren);
+	}
+};
+
+var p = new people();
+p.addchilren("111");
+console.log(p);
+</script>
+</body>
+</html>

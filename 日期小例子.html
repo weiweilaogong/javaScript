@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>日期小例子</title>
+</head>
+<body>
+<h1 id='curr'></h1>
+<script src="jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+	var getCurrTime = function(){
+		var str = "当前时间:";
+			setInterval(function(){
+				var time = new Date();
+				var hours = time.getHours();
+				var secend = time.getSeconds();
+				var minute = time.getMinutes();
+				var tempHours = (hours>12)?hours-12:hours;
+				if(tempHours == 0){
+					tempHours="12";
+				}
+				str+=tempHours+"点"+minute+"分"+secend+"秒";
+               	$("#curr").html(str);
+               	str="当前时间:"
+			},100);
+	}
+	getCurrTime();
+
+
+	//数组
+	var arr = new Array();
+
+	arr[3.14159265374] = "hhh";
+
+	for(var i in arr){
+		console.log(arr[i])
+	}
+	console.log(arr)
+	console.log(arr.hasOwnProperty("14159265374"));
+	console.log(arr.hasOwnProperty("3.14159265374"));
+</script>
+</body>
+</html>

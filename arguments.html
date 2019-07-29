@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+
+		var person = function(name,ages){
+			for(var i in arguments){
+				//arguments 对象的key为0,1,2
+				console.log(arguments[i])
+			}
+			return {
+				eat:function(){
+					console.log(name+"吃饭")
+				},
+				talk:function(){
+					console.log(name+"散步")
+				}
+			}
+		}
+		var zhangsan = person("张三",11,12);
+		zhangsan.eat();
+		zhangsan.talk();
+	</script>
+</body>
+</html>

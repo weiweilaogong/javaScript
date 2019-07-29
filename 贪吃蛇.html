@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>贪吃蛇</title>
+    <style type="text/css">
+        body, table, td, tr {
+            padding: 0;
+            margin: 0;
+        }
+ 
+        td {
+            width: 48px;
+            height: 48px;
+            border: 1px solid #6eb3d8;
+        }
+ 
+        #map {
+            background: #6eb3d8;
+            width: 500px;
+            height: 500px;
+            opacity: 0.3;
+            position: absolute;
+            top: 0;
+        }
+ 
+        div {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+        }
+ 
+        #game {
+            position: absolute;
+            top: 510px;
+            left: 20px;
+        }
+ 
+        #a {
+            position: absolute;
+            top: 515px;
+        }
+ 
+        #b {
+            position: absolute;
+            top: 515px;
+            left: 50px;
+        }
+ 
+        #c {
+            position: absolute;
+            top: 515px;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<h3 id="game"><p id="score">本轮成绩为:</p></h3>
+<input type="button" value="慢" οnclick="speed('1000')" id="a">
+<input type="button" value="中" οnclick="speed('500')" id="b">
+<input type="button" value="块" οnclick="speed('100')" id="c">
+<script>
+    //分数的id
+    var score = document.getElementById("score");
+    //初始化分数为0
+    var scoreNum = 0;
+ 
+    //第一步：创建表格
+    document.write("<table cellspacing='0'>");
+    for (var n = 0; n < 10; n++) {
+        document.write("<tr>")
+        for (var m = 0; m < 10; m++) {
+            document.write("<td></td>");
+        }
+        document.write("</tr>")
+    }
+    document.write("</table>");
+    //第二步：创建地图
+    var map = document.getElementById("map");
+    //第三步：创建所有块，蛇头 身体 食物
+    function createNode(type) {
+        //获取蛇头的随机坐标
+        var x = parseInt(Math.random() * 10) * 50;
+        var y = parseInt(Math.random() * 10) * 50;
+        //alert(x);
+        //添加三块的div
+        var div = document.createElement("div");
+        div.style.left = x + "px";
+        div.style.top = y + "px";
+        map.appendChild(div);
+        if (type == 0) {//蛇头
+            div.style.background = "red";
+        }
+        if (type == 1) {//身体
+            div.style.background = "yellow";
+        }
+        if (type == 2) {//食物
+            div.style.background = "blue";
+        }
+        return div;
+    }
+    var allNode = new Array();//存所有的身体
+    var allHeadBody = new Array();//存头和身体
+    //第三步：创建头部的div
+    var headNode = null;
+    var foodNode = null;
+    headNode = createNode(0);
+    foodNode = createNode(2);
+    allHeadBody.push(headNode);//把蛇头添加到存储头和身体的数组中
+ 
+ 
+    headNode.value = 37;
+    //第三步：移动头部
+    function moveNode() {
+        //判断游戏有没有出界
+        if (parseInt(headNode.style.top) >= 500 || parseInt(headNode.style.left) >= 500 || parseInt(headNode.style.top) < 0 || parseInt(headNode.style.left) < 0) {
+            alert("游戏结束");
+            //停止游戏，停止定时器，则把定时器给一个变量
+            clearInterval(stopGame);
+        }
+ 
+        //第四步：检测是否碰撞
+        if (headNode.style.left == foodNode.style.left && headNode.style.top == foodNode.style.top) {
+            //碰撞一次加0分
+            scoreNum += 10;
+            //写入到score中
+            score.innerHTML = "本轮成绩为：" + scoreNum;
+ 
+            //第五步：创建身体,记录当前的身体
+            var bodyNode = createNode(1);
+            var lastNode = null;//身体的最后一块
+            //判断身体最后一块的方向（键盘位置）
+            if (allNode.length == 0) {
+                lastNode = headNode;
+            } else {
+                lastNode = allNode[allNode.length - 1];
+            }
+            bodyNode.value = lastNode.value;
+ 
+            switch (parseInt(lastNode.value)) {//根据蛇头判断 身体的位置
+                case 37:
+                    bodyNode.style.left = parseInt(lastNode.style.left) + 50 + "px";
+                    bodyNode.style.top = lastNode.style.top;
+                    break;
+                case 38:
+                    bodyNode.style.top = parseInt(lastNode.style.top) + 50 + "px";
+                    bodyNode.style.left = lastNode.style.left;
+                    break;
+                case 39:
+                    bodyNode.style.left = parseInt(lastNode.style.left) - 50 + "px";
+                    bodyNode.style.top = lastNode.style.top;
+                    break;
+                case 40:
+                    bodyNode.style.top = parseInt(lastNode.style.top) - 50 + "px";
+                    bodyNode.style.left = lastNode.style.left;
+                    break;
+            }
+            allNode.push(bodyNode);//存所有的身体
+            allHeadBody.push(bodyNode);//存的头和身体
+ 
+ 
+            //判断食物和身体不能重叠
+            var foodbool = true;
+            var px = 0;
+            var py = 0;
+            var num = 0;
+            while (foodbool) {
+                px = parseInt(Math.random() * 10) * 50 + "px";
+                py = parseInt(Math.random() * 10) * 50 + "px";
+                for (var n = 0; n < allHeadBody.length; n++) {
+                    if (allHeadBody[n].style.left == px && allHeadBody[n].style.top == py) {
+                        num++;
+                    }
+                }
+                if (num == 0) {
+                    foodbool = false;
+                } else {
+                    num = 0;
+                }
+ 
+            }
+            foodNode.style.left = px;
+            foodNode.style.top = py;
+ 
+ 
+//
+ 
+        }
+        //让身体跟着蛇头走
+        if (allNode.length > 0) {
+            for (var n = allNode.length - 1; n >= 0; n--) {
+                //判断蛇头和身体不能碰撞
+                if (headNode.style.left == allNode[n].style.left && headNode.style.top == allNode[n].style.top) {
+                    alert("游戏结束，碰撞身体了！");
+                    clearInterval(stopGame);
+ 
+                }
+ 
+                switch (parseInt(allNode[n].value)) {
+                    case 37:
+                        allNode[n].style.left = parseInt(allNode[n].style.left) - 50 + "px";
+                        break;
+                    case 38:
+                        allNode[n].style.top = parseInt(allNode[n].style.top) - 50 + "px";
+                        break;
+                    case 39:
+                        allNode[n].style.left = parseInt(allNode[n].style.left) + 50 + "px";
+                        break;
+                    case 40:
+                        allNode[n].style.top = parseInt(allNode[n].style.top) + 50 + "px";
+                        break;
+                }
+                if (n > 0) {
+                    allNode[n].value = allNode[n - 1].value;
+                } else {
+                    allNode[n].value = headNode.value;
+                }
+ 
+            }
+        }
+ 
+        //根据headNode.value的初始值移动蛇头方向
+        switch (parseInt(headNode.value)) {
+            case 37://左
+                headNode.style.left = (parseInt(headNode.style.left) - 50) + "px";
+                break;
+            case 38://上
+                headNode.style.top = (parseInt(headNode.style.top) - 50 ) + "px";
+                break;
+            case 39://右
+                headNode.style.left = (parseInt(headNode.style.left) + 50) + "px";
+                break;
+            case 40://上
+                headNode.style.top = (parseInt(headNode.style.top) + 50) + "px";
+                break;
+        }
+ 
+ 
+    }//移动蛇头结束
+ 
+    //控制速度
+ 
+    //初始默认的速度
+    var newspeed = 500;
+    function speed(num) {
+        newspeed = num;
+//        clearInterval(stopGame);
+        stopGame = setInterval(moveNode, newspeed);
+        speed=null;//函数执行一次，第二次调用则函数为空
+    }
+    //stopGame = setInterval(moveNode, newspeed);
+    document.onkeydown = function () {
+        // alert(event.keyCode);
+        switch (event.keyCode) {
+            case 37://左
+                if (headNode.value != 39 || allNode.length <= 0) {
+                    headNode.value = 37;
+                }
+                break;
+            case 38://上
+                if (headNode.value != 40 || allNode.length <= 0) {
+                    headNode.value = 38;
+                }
+                break;
+            case 39://右
+                if (headNode.value != 37 || allNode.length <= 0) {
+                    headNode.value = 39;
+                }
+                break;
+            case 40://上
+                if (headNode.value != 38 || allNode.length <= 0) {
+                    headNode.value = 40;
+                }
+                break;
+        }
+    }
+</script>
+</body>
+</html>

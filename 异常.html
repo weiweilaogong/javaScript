@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="jquery-1.8.2.min.js"></script>		
+</head>
+<body>
+	<script type="text/javascript">
+		var desc;
+		try{
+			getMonthName(13);
+		}catch(e){
+			console.log(new Error('找不到对应的英文月份描述'));
+			throw new Error(`找不到对应的英文月份描述`);
+		}
+		function getMonthName(num){
+			num = num - 1;
+			var month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+			if(month[num]){//如果存在
+				return month[num]
+			}else{
+				throw "monthNotdefind";
+			}
+
+		}
+	</script>
+</body>
+</html>

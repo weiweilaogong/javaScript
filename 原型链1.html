@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	function doSomething(){}
+	// doSomething.prototype.too = 'zhangsan';
+
+	var doSomethingInstance = new doSomething();
+	doSomethingInstance.prop = 'lisi';
+
+
+	// console.log("doSomething:"+doSomething);
+	// console.log("doSomethingInstance:"+doSomethingInstance);
+
+
+	// console.log("doSomething.prototype.too:"+doSomething.prototype.too)
+	// console.log("doSomethingInstance.prop:"+doSomethingInstance.prop)
+
+	// //函数的prototype 可以获得原型
+	// console.log("doSomethingInstance.too:"+doSomethingInstance.too)
+	// console.log("doSomething.prop:"+doSomething.prop)
+	
+	//console.log("doSomethingInstance.too:"+doSomethingInstance.too) //通过实例可以获取到原型上的属性
+	console.log(doSomethingInstance.__proto__)
+	console.log(doSomething.prototype)
+
+	/**
+	 * object.prototype == newObject._proto_
+	 */
+	
+
+	//查看newObject._proto_._proto 是否为 window.Object.prototype
+	
+	console.log(doSomethingInstance.__proto__.__proto__ == window.Object.prototype)  //true
+
+	//所以我们理解为
+	//
+	//  window>object>newObject
+	//	newObject.__proto__ == object.prototype   object.__proto__ == window.Object.prototype
+	//
+	//验证
+	
+	console.log(doSomethingInstance.__proto__ == doSomething.prototype)  //true
+
+	//接着验证object.prototype.__proto__ == window.Object.prototype    true?
+	console.log(doSomething.prototype.__proto__ == window.Object.prototype)  //true
+
+
+	//验证 window.Object.__proto__ == window.Object.prototype
+	//
+	console.log(window.Object.__proto__)
+	console.log(window.Object.prototype)
+
+	//json
+	var person = {};
+	console.log(doSomething.prototype)
+	console.log(person.__proto__)
+	console.log(person.prototype)
+
+</script>
+</body>
+</html>

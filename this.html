@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	var person = function(){
+		this.age = 0;
+		setInterval(function growUp(){
+			this.age++;
+			// console.log(this.age)
+		},100)
+	}
+	var p = new person();
+	console.log(p.age)
+
+	function person1(){
+		this.age = 0;
+		setInterval(function growUp(){
+			this.age++;
+			// console.log(this.age)
+		},100)
+	}
+	var p1 = new person1();
+	console.log(p1.age);
+
+
+	/**
+	 * 两种方法解决this在函数的初始化(this值传递给内部方法)
+	 *
+	 * 1.使用 变量保存
+	 * 2.箭头函数
+	 */
+
+	//_self
+	var person2 = function(){
+		var _self = this;
+		_self.age = 0;
+		setInterval(function(){
+			_self.age++;
+			// console.log(_self.age)
+		})
+	}
+	var p2 = new person2();
+	console.log(p2)
+
+
+	//=> 箭头函数
+	//
+	var person3 = function(){
+		this.age = 0;
+		setInterval(()=>{
+			this.age ++;		
+		})
+		console.log(this.age)
+	}
+	var p3 = new person3();
+	setInterval(()=>{
+		console.log(p3.age)
+	},1000)
+</script>
+</body>
+</html>

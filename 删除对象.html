@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<a href="javascript:void(1)">提交</a>
+	<a href="javascript:void(console.log(window.cancelIdleCallback(00000)))">Click here to submit</a>
+	</br>
+	Enter a number between 18 and 99:<input name='age' size='3' type="text"  onchange='validate(this,1,10)'/>
+<script type="text/javascript">
+	var validate = function(obj,first,secend){
+		if(obj.value == ''){
+			alert('不能为空')
+			return;
+		}
+		if(obj.value>first&&obj.value<secend){
+			alert("√")
+			return;
+		}
+		alert("X")
+	}
+	var x = 10;
+	delete x;
+	console.log(x)
+	var num= new Number();
+	// num = 10;
+	num.j = 100;
+	delete num;
+	// delete num.j;
+	// 
+	console.log(num);
+	console.log(num.j);
+
+	var trees = new Array("redwood", "bay", "cedar", "oak", "maple");
+
+	// delete trees[3];
+	trees[3] = undefined;
+	for(var i in trees){
+		console.log(trees[i])
+	}
+	console.log(trees)
+
+	var myFun = new Function("5 + 2");
+	var shape = "round";
+	var size = 1;
+	var today = new Date();
+
+	console.log(typeof myFun == 'function')
+	console.log(typeof shape == 'string')
+	console.log(typeof size == 'number')
+	console.log(typeof today == 'object')
+
+</script>
+</body>
+</html>

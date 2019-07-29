@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	var a = [
+	  "Hydrogen",
+	  "Helium",
+	  "Lithium",
+	  "Beryllium"
+	];
+
+var result = a.map(function(s){
+	return s+"hhh";
+})
+
+console.log(result)
+//返回一个新的数组
+var result1 = a.map(s => s+="hhh");//s 表示参数 =>代码逻辑
+console.log(result1)
+console.log(a)
+</script>
+</body>
+</html>

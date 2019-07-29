@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+	var object = {
+		num : 1,
+		sum : function(){
+			return this.num +1;
+		}
+	}
+	console.log(object.sum())
+
+	var newObject = Object.create(object);
+	newObject.num = 3;
+	console.log(object);
+	console.log(newObject);
+	呵呵
+</script>
+</body>
+</html>
