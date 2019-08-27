@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>原型链继承</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+var huazhen = function(){
+	this.coding = function(){
+		console.log("coding.....")
+	}
+}
+
+var baby = function(){
+	this.eat = function(){
+		console.log("eat nai...")
+	}
+}
+baby.prototype = new huazhen();
+
+var smallBaby = new baby();
+smallBaby.coding();
+console.log(smallBaby);
+
+/*--------------------------------------------*/
+//所以的原型链顶层都是object
+var Weiqiyan = function(){
+
+}
+Weiqiyan.prototype.detail = "漂亮";
+Weiqiyan.prototype.sex = "女";
+Weiqiyan.prototype.shopping = function(){
+	console.log("shopping.....");
+}
+
+var secendBaby = function(){
+
+}
+secendBaby.prototype = new Weiqiyan();
+
+var baby2 = new secendBaby();
+console.log(baby2.sex)
+baby2.sex = "男";
+//修改原型链属性
+baby2.__proto__.sex = "不清楚"
+console.log(baby2);
+
+var xifu = new Weiqiyan();
+console.log(xifu)
+
+
+</script>
+</html>

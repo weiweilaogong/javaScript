@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>对象冒充</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	function ClassA(Scolor){
+		this.color = Scolor;
+		this.sayColor = function(){
+			alert(this.color)
+		}
+	}
+
+	function ClassB(Scolor,Sname){
+		this.newMethod = ClassA;
+		this.newMethod(Scolor);
+		delete this.newMethod;
+		this.name = Sname;
+		this.sayName = function(){
+			alert(this.name);
+		}
+		// this.sayColor = function(Scolor){ //如果有重复的方法名要放到delete
+		// 	alert(Scolor)
+		// }
+		delete this.newMethod;
+	}
+
+//ClassA为基类，ClassB为子类
+var classb = new ClassB("yellow","huaz");
+var classa = new ClassA("blue");
+console.log(classb)
+console.log(classa)
+classb.sayColor();
+classa.sayColor();
+classb.sayName();
+</script>
+</html>

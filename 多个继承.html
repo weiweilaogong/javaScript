@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>多个继承</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+/**		
+ * 对象persion,对象user 都被医生继承，医生拥有persion，user的属性和方法
+ */
+
+function User(Uname,Uage){
+	this.name = Uname;
+	this.age = Uage;
+	this.sayHello = function(){
+		console.log("hello")
+	};
+	this.eat =function(food){
+		console.log("eat:"+food)
+	}
+}
+
+
+function Persion(Pname,Page){
+	this.name = Pname;
+	this.age = Page;
+	this.papapa = function(){
+		console.log("papapa")
+	}
+}
+
+function Doctor(){
+	this.detail = User;
+	this.detail();
+	delete this.detail;
+
+	this.persionType = Persion;
+	this.persionType();
+	delete this.Persiontype;
+
+	this.cure = function(){
+		console.log("我治好了一个病人");
+	}
+
+	this.pianRen = function(){
+		console.log("我还会骗人")
+	}
+}
+
+var doctor = new Doctor();
+doctor.name = "张三";
+doctor.cure();
+doctor.papapa();
+doctor.eat("烤肠");
+console.log(doctor)
+
+
+</script>
+</html>
